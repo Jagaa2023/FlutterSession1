@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:untitled/Customer/View/aProfile.dart';
 import '../Model/Customer.dart';
 import '../Model/Customer.dart';
@@ -6,7 +7,9 @@ import '../Model/Customer.dart';
 
 
 class ListViewProfile extends StatefulWidget {
-  const ListViewProfile({Key? key}) : super(key: key);
+
+  String title_;
+  ListViewProfile( this.title_, {Key? key} ) : super(key: key);
 
   @override
   State<ListViewProfile> createState() => _ListViewProfileState();
@@ -43,34 +46,55 @@ class _ListViewProfileState extends State<ListViewProfile> {
   @override
   Widget build(BuildContext context) {
     return
-      ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemBuilder:
-              (BuildContext context, int index) {
-            return
-              // InkWell(
-              //   onTap: (){
-              //     Navigator.of(context).pop( User_All[index] );
-              //   },
-              //    child:
+      SingleChildScrollView(
+        child: Column(
+          children: [
 
-              //Column(  children: [
+            Material(
+              child: InkWell(
+                child: Text(widget.title_),
+                onDoubleTap: (){
+
+                  Navigator.of(context).pop( "Hello this is return value");
+
+
+                },
+              ),
+            ),
+
+
+
+            ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder:
+                    (BuildContext context, int index) {
+                  return
+                    // InkWell(
+                    //   onTap: (){
+                    //     Navigator.of(context).pop( User_All[index] );
+                    //   },
+                    //    child:
+
+                    //Column(  children: [
                     aProfile (  lstItem[index].Name,  lstItem[index].MailAddress, lstItem[index].Pic  );
 
-              //    ]
-            //  );
-            //  );
+                  //    ]
+                  //  );
+                  //  );
 
-          },
-          shrinkWrap: true,
+                },
+                shrinkWrap: true,
 
-          // scrollDirection: Axis.horizontal,
-          itemCount:  lstItem
-              .asMap()
-              .length
+                // scrollDirection: Axis.horizontal,
+                itemCount:  lstItem
+                    .asMap()
+                    .length
 
 
+            )
+          ],
+        ),
       );
 
 
